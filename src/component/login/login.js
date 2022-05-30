@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom";
 import './login.css';
+import {route} from "../../route/route";
+
 const Login = ()=>
 {
+    const submit =async (event) => {
+        event.preventDefault();
+        let params = {
+            username: event.target[0].value,
+            password: event.target[1].value
+        }
+        let result = await route.login(params);
+        console.log(result)
+    }
     return(
         <div className="login">
-            <form action="/login" className="sign-form" method="post">
+            <form action="#" onSubmit={(formData) => {submit(formData); return false}} className="sign-form" >
                 <div className="login-title">
                     <h1>Login</h1>
                 </div>

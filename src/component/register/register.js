@@ -1,10 +1,21 @@
 import { Link } from "react-router-dom";
 import './register.css';
+import {route} from "../../route/route";
+const axios = require('axios')
 const Register = ()=>
 {
+    const submit =async (event) => {
+        event.preventDefault();
+        let params = {
+            username: event.target[0].value,
+            password: event.target[1].value
+        }
+        let result = await route.register(params);
+        console.log(result)
+    }
     return(
         <div className="register">
-            <form action="/register" className="sign-form" method="POST">
+            <form action="#" onSubmit={(formData) => {submit(formData); return false}} className="sign-form" >
                 <div className="register-title">
                     <h1>Register</h1>
                 </div>
