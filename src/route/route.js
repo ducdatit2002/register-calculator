@@ -1,13 +1,18 @@
+import baseURL from "../util/constant/axios";
 const axios = require('axios')
-const url = "http://localhost:5000"
 
-export const route= {
-    register: async(params) => {
-        let result = await axios.post(`${url}/register`, params)
-        return result.data
-    },
-    login: async (params) => {
-        let result = await axios.post(`${url}/login`,params)
-        return result.data
+
+const Route =
+    {
+        registerPost: async (params)=>
+        {
+            let result = await axios.post(`${baseURL}/register`,params)
+            return result.data
+        },
+        loginPost: async (params)=>
+        {
+            let result = await axios.post(`${baseURL}/login`,params)
+            return result.data
+        }
     }
-}
+export default Route

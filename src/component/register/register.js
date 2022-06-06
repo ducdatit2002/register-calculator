@@ -1,21 +1,30 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './register.css';
-import {route} from "../../route/route";
-const axios = require('axios')
+import Route from "../../route/route";
+const handleRegister = async (event,navigate) => {
+    event.preventDefault();
+    let params = {
+        username:event.target[0].value,
+        password: event.target[1].value
+    }
+    try
+    {
+        const result = await Route.registerPost(params)
+        console.log(result)
+        navigate('/login')
+    }
+    catch (err)
+    {
+        alert("Error due to ",err)
+    }
+
+}
 const Register = ()=>
 {
-    const submit =async (event) => {
-        event.preventDefault();
-        let params = {
-            username: event.target[0].value,
-            password: event.target[1].value
-        }
-        let result = await route.register(params);
-        console.log(result)
-    }
+    let navigate = useNavigate ();
     return(
         <div className="register">
-            <form action="#" onSubmit={(formData) => {submit(formData); return false}} className="sign-form" >
+            <form action="#" onSubmit={(formData) => {handleRegister(formData,navigate); return false}} className="sign-form" >
                 <div className="register-title">
                     <h1>Register</h1>
                 </div>

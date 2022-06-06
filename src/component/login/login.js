@@ -1,21 +1,29 @@
-import { Link } from "react-router-dom";
-import './login.css';
-import {route} from "../../route/route";
+import './login.css'
+import { Link,useNavigate  } from "react-router-dom";
+import Route from "../../route/route";
 
+
+const handleLogin = async (event,navigate) => {
+    event.preventDefault();
+    let params = {
+        username:event.target[0].value,
+        password: event.target[1].value
+    }
+    const result = await Route.loginPost(params)
+    if (result===true)
+        navigate('/')
+    else
+        alert("Wrong username or password")
+}
 const Login = ()=>
 {
-    const submit =async (event) => {
-        event.preventDefault();
-        let params = {
-            username: event.target[0].value,
-            password: event.target[1].value
-        }
-        let result = await route.login(params);
-        console.log(result)
-    }
+    let navigate = useNavigate()
     return(
-        <div className="login">
-            <form action="#" onSubmit={(formData) => {submit(formData); return false}} className="sign-form" >
+        <div className={'login'}>
+            <form action="#" onSubmit={(formData) => {
+                handleLogin(formData,navigate);
+                return false
+            }}>
                 <div className="login-title">
                     <h1>Login</h1>
                 </div>
